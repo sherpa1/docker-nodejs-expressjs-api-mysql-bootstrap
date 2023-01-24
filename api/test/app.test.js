@@ -11,4 +11,25 @@ describe("Test du router index.js", () => {
         const response = await request(app).get("/").set('accept', 'json');
         expect(response.body.message).toMatch("Hello, World !");
     });
+
+    test("Test de création d'une tâche (Task), code HTTP 201 attendu", async () => {
+        const response = await request(app).post("/tasks").send({ user_id: 1, content: "Acheter du pain pour ce soir" }).set('accept', 'json');
+        expect(response.statusCode).toBe(201);
+    });
+
+    test("Test de lecture des tâches et vérification de la présence de la tâche qui vient d'être ajoutée", async () => {
+        const response = await request(app).get("/tasks").set('accept', 'json');
+
+        const data = response.body.data;
+
+        expect(data).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining(
+                    { completed: false, content: "Acheter du pain pour ce soir", user_id: 1 },
+                )
+            ]
+            )
+        );
+
+    });
 });

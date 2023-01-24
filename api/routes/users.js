@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require("../db_connection");
+const User = require('../models/User');
 
 router.get('/', async (req, res, next) => {
     try {
-        const users = await db('users');
+        const users = await User.findAll();
         res.json({ data: users });
     } catch (error) {
         console.error(error);

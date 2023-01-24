@@ -1,12 +1,19 @@
-const knex = require('knex')({
-    client: 'mysql',
-    connection: {
-        host: process.env.DB_HOST,
-        port: 3306,
-        user: process.env.MARIADB_USER,
-        password: process.env.MARIADB_PASSWORD,
-        database: process.env.MARIADB_DATABASE
-    }
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize(process.env.MARIADB_DATABASE, process.env.MARIADB_USER, process.env.MARIADB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql'
+    /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
 });
 
-module.exports = knex;
+(async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
+
+);
+module.exports = sequelize;

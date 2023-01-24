@@ -11,6 +11,8 @@ CREATE TABLE `tasks` (
   `content` text NOT NULL,
   `completed` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1=completed, 0=to do',
   `user_id` int(10) unsigned NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE

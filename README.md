@@ -31,6 +31,9 @@ Exemple : `docker compose run --rm api npm install`
 - Exécuter une commande dans un container __déjà démarré__ :
 `docker exec -ti <container id> <commande>`
 
+Ex : 
+`docker exec -ti <container id> npm install mysql`
+
 ## Suppression de tous les services Docker
 
 `docker compose down`
@@ -45,6 +48,22 @@ Exemple : `docker compose run --rm api npm install`
 ## Suppression des données du volume associé à la base de données (remise à zéro)
 `rm -rf ./db/data`
 
+## Test de l'API avec Curl
+
+### Lecture de la liste des Tasks
+
+```
+curl http://localhost:3333/tasks
+```
+
+### Création d'une Task
+
+```
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"content": "Préparer à manger", "user_id": 1}' \                     
+    http://localhost:3333/tasks
+```
+
 ## API Node.js
 - URL = http://localhost:3333
 
@@ -56,17 +75,21 @@ Exemple : `docker compose run --rm api npm install`
 - Mot de passe = cf. fichier .env
 - Base de données = cf. fichier .env
 
+## Tests unitaires avec Jest
+
+https://jestjs.io/fr/docs/getting-started
+
+https://codewithhugo.com/jest-array-object-match-contain/
+
 ## Adminer
 
 Interface web de gestion de base de données
 
 https://www.adminer.org/
 
-## Knex.js
+## Sequelize ORM
 
-Module NPM pour requêter une base de données
-
-https://knexjs.org/
+https://sequelize.org/
 
 --
 
