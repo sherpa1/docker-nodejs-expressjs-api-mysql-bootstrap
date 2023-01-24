@@ -62,6 +62,23 @@ Interface web de gestion de base de données
 
 https://www.adminer.org/
 
+## Test de l'API avec Curl
+
+### Test de lecture des tâches
+
+curl http://localhost:3333/tasks
+
+### Test d'ajout d'une tâche
+```
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"content": "Préparer à manger", "user_id": 1}' \
+    http://localhost:3333/tasks
+```
+
+## Tests unitaires avec Jest
+
+https://jestjs.io/
+
 ## Knex.js
 
 Module NPM pour requêter une base de données
